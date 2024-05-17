@@ -1,0 +1,54 @@
+.form {
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
+.form .row {
+  padding-top: 1rem;
+}
+
+.image-checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-checkbox>input[type="checkbox"],
+.image-checkbox>input[type="radio"] {
+  display: none;
+}
+
+.image-checkbox>label {
+  cursor: pointer;
+}
+
+.image-checkbox> :checked+label {
+  outline: 4px solid black;
+}
+
+.item-frame {
+  background-image: url("../img/itemPlaceholder/skill-kuang1.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.purple-stat>* {
+  background-color: pink;
+}
+
+.soul-stat-amount {
+  width: 4rem;
+}
+
+.phy-stat-amount {
+  width: 3rem;
+}
+
+.glyph-stat-amount {
+  width: 6rem;
+}
+
+.icon {
+  width: 1.5rem;
+}
