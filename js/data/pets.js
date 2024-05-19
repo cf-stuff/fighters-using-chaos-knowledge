@@ -77,11 +77,23 @@ const Pets = {
     iconId: 13,
     evoIconId: 1013,
   },
+  olave: {
+    name: "Olave",
+    evoName: "Olave",
+    iconId: 14,
+    evoIconId: 1014,
+  },
   rekachu: {
     name: "Rekachu",
     evoName: "Awakening Rekachu",
     iconId: 15,
     evoIconId: 1015,
+  },
+  nemesis: {
+    name: "Nemesis",
+    evoName: "Nemesis",
+    iconId: 16,
+    evoIconId: 1016,
   },
   snowFox: {
     name: "Snow Fox",

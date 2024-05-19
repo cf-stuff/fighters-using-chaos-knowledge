@@ -167,10 +167,10 @@ const PetSkills = {
     triggerPercent: 10,
   },
   foxSpecialStat: {
-    name: "50EVA (Gale Fox Special)",
+    name: "150EVA (Gale Fox Special)",
     type: PetSkillType.stat,
     iconId: "27_1",
-    stat: { eva: 50 }
+    stat: { eva: 150 }
   },
   dogSpecialStat: {
     name: "150BRK (Psychic Dog Special)",
@@ -209,10 +209,10 @@ const PetSkills = {
     stat: { spd: 10 }
   },
   tigerSpecialStat: {
-    name: "50EVA (Ghost Tiger Special)",
+    name: "150EVA (Ghost Tiger Special)",
     type: PetSkillType.stat,
     iconId: "27_8",
-    stat: { eva: 50 }
+    stat: { eva: 150 }
   },
   cocoSpecialStat: {
     name: "150HIT (Coco Special)",
@@ -244,11 +244,23 @@ const PetSkills = {
     iconId: "27_13",
     stat: { brk: 150 }
   },
+  olaveSpecialStat: {
+    name: "150CRT (Olave Special)",
+    type: PetSkillType.stat,
+    iconId: "27_14",
+    stat: { crt: 150 }
+  },
   rekachuSpecialStat: {
-    name: "50EVA (Rekachu Special)",
+    name: "150EVA (Rekachu Special)",
     type: PetSkillType.stat,
     iconId: "27_15",
-    stat: { eva: 50 }
+    stat: { eva: 150 }
+  },
+  nemesisSpecialStat: {
+    name: "60DEF (Nemesis Special)",
+    type: PetSkillType.stat,
+    iconId: "27_16",
+    stat: { def: 60 }
   },
   snowFoxSpecialStat: {
     name: "10SPD (Snow Fox Special)",
@@ -328,7 +340,6 @@ const PetSkills = {
     effect: {
       status: Status.frozen.name,
       target: SkillTarget.enemy,
-      applyAfterFury: true
     },
     phase: SkillPhase.petAttack,
     triggerPercent: 10,
@@ -439,7 +450,20 @@ const PetSkills = {
     effect: {
       status: Status.frozen.name,
       target: SkillTarget.enemy,
-      applyAfterFury: true
+    },
+    phase: SkillPhase.petAttack,
+    triggerPercent: 10,
+  },
+  olaveSpecialSkill: {
+    name: "Freezing (Olave Special)",
+    type: PetSkillType.skill,
+    iconId: "28_14",
+    damage: {
+      atkMultiplier: 0.5
+    },
+    effect: {
+      status: Status.frozen.name,
+      target: SkillTarget.enemy,
     },
     phase: SkillPhase.petAttack,
     triggerPercent: 10,
@@ -448,6 +472,20 @@ const PetSkills = {
     name: "Seal (Rekachu Special)",
     type: PetSkillType.skill,
     iconId: "28_15",
+    damage: {
+      atkMultiplier: 0.5
+    },
+    effect: {
+      status: Status.silenced.name,
+      target: SkillTarget.enemy
+    },
+    phase: SkillPhase.petAttack,
+    triggerPercent: 10,
+  },
+  nemesisSpecialSkill: {
+    name: "Seal (Nemesis Special)",
+    type: PetSkillType.skill,
+    iconId: "28_16",
     damage: {
       atkMultiplier: 0.5
     },
@@ -789,6 +827,10 @@ const PetSkills = {
     effect: {
       status: Status.wine.name,
       target: SkillTarget.enemy,
+    },
+    secondaryEffect: {
+      status: Status.clumsy.name,
+      target: SkillTarget.enemy
     },
     phase: SkillPhase.onPetBlock,
     triggerPercent: 40,
