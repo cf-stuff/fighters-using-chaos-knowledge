@@ -431,6 +431,16 @@ const Fighters = {
     bmv: [7, 15, 15],
     mastery: SkillType.thunder.name
   },
+  luffy: {
+    name: "Pirate D. L",
+    evoName: "E·Pirate D. L",
+    iconId: 86,
+    weaponType: WeaponType.gloves,
+    isv: [27, 27, 36],
+    growthRate: [1.55, 1.55, 1.9],
+    bmv: [12, 12, 8],
+    mastery: SkillType.cursedSealJutsu.name
+  }
 };
 
 export default Fighters;
