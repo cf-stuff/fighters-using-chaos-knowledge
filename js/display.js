@@ -44,6 +44,13 @@ export async function createProfile(player, options = { bg: 11, left: true }) {
     ctx.scale(-1, 1);
   }
 
+  ctx.font = "bold 21px arial";
+  ctx.strokeStyle = "#FFFFFF";
+  ctx.fillStyle = "#FF0000";
+  const x = options.left ? ctx.canvas.width - 70 : 20;
+  ctx.strokeText("F U C", x, 29);
+  ctx.fillText("F U C", x, 29);
+
   if (!player) return canvas;
 
   if (player.fighter.name === "None") {

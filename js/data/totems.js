@@ -25,7 +25,7 @@ const Totems = {
     },
     phase: SkillPhase.petAttack,
     triggerPercent: 2,
-    triggerPercentPerLevel: 0.1
+    triggerPercentPerLevel: 0.2
   },
   blue: {
     name: "Positive Cleanse Totem",
@@ -38,7 +38,7 @@ const Totems = {
     },
     phase: SkillPhase.petAttack,
     triggerPercent: 2,
-    triggerPercentPerLevel: 0.1
+    triggerPercentPerLevel: 0.2
   },
   green: {
     name: "Positive Seal Totem",
@@ -52,7 +52,7 @@ const Totems = {
     },
     phase: SkillPhase.petAttack,
     triggerPercent: 2,
-    triggerPercentPerLevel: 0.1
+    triggerPercentPerLevel: 0.2
   },
   yellow: {
     name: "Time Vortex Totem",
@@ -78,7 +78,7 @@ const Totems = {
     },
     phase: SkillPhase.petAttack,
     triggerPercent: 2,
-    triggerPercentPerLevel: 0.1
+    triggerPercentPerLevel: 0.2
   },
   red: {
     name: "Positive Burn Totem",
@@ -92,7 +92,7 @@ const Totems = {
     },
     phase: SkillPhase.petAttack,
     triggerPercent: 2,
-    triggerPercentPerLevel: 0.1
+    triggerPercentPerLevel: 0.2
   },
   white: {
     name: "Lightning Attack Totem",
