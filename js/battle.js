@@ -217,6 +217,14 @@ function getSkillTriggerProbability(state, playerIndex, skill) {
 }
 
 function tryToUseSkillFromPhase(state, playerIndex, phase) {
+  if (phase === SkillPhase.onDeath) {
+    for (const status of state.players[playerIndex].status) {
+      if (status.effect.preventOnDeath) {
+        state.log.push(`|info|On death skills disabled due to being ${status.name}`);
+        return false;
+      }
+    }
+  }
   const skill = Utils.randomElement(getAllSkillsEligibleToBeUsed(state, playerIndex, phase));
   if (skill) {
     return useSkill(state, playerIndex, skill);
@@ -397,6 +405,9 @@ function handlePostFurySkillEffects(state, playerIndex, skill, damage, preventHe
   if (skill.effect.increaseSpd) {
     updateStat(state, playerIndex, Stats.spd.name, true, skill.effect.increaseSpd, skill.name);
   }
+  if (skill.effect.increaseEva) {
+    updateStat(state, playerIndex, Stats.eva.name, true, skill.effect.increaseEva, skill.name);
+  }
   if (skill.effect.percentDamageHealedOnHit && state.players[playerIndex].stats.current.hp > 0) {
     const healAmount = preventHealing ? 0 : Math.floor(damage * skill.effect.percentDamageHealedOnHit / 100);
     updateStat(state, playerIndex, Stats.hp.name, true, healAmount, skill.name);
@@ -434,6 +445,9 @@ function handlePostFurySkillEffects(state, playerIndex, skill, damage, preventHe
     if (skillToIncrease) {
       skillToIncrease.triggerProbability += skill.effect.increaseTriggerPercentAmount / 100;
     }
+  }
+  if (skill.effect.removeEnemyBell) {
+    removeStatus(state, playerIndex ^ 1, Status.goldenShield.name);
   }
 }
 
@@ -518,6 +532,9 @@ function createStatus(state, playerIndex, name, options) {
   if (status.effect.removeIgnitedOnInflict) {
     removeStatus(state, playerIndex, Status.ignited.name);
   }
+  if (status.effect.removeFrenzyOnInflict) {
+    removeStatus(state, playerIndex, Status.bloodFrenzy.name);
+  }
   if (status.effect.percentHpShield) {
     status.hpShield = Math.floor(state.players[playerIndex].stats.initial.hp * status.effect.percentHpShield / 100);
   }
@@ -542,8 +559,14 @@ function createStatus(state, playerIndex, name, options) {
   if (status.effect.decreaseBrk) {
     updateStat(state, playerIndex, Stats.brk.name, false, -status.effect.decreaseBrk, name);
   }
+  if (status.effect.increaseDef) {
+    updateStat(state, playerIndex, Stats.def.name, true, status.effect.increaseDef, name);
+  }
   if (status.effect.decreaseDef) {
     updateStat(state, playerIndex, Stats.def.name, false, -status.effect.decreaseDef, name);
+  }
+  if (status.effect.increaseRes) {
+    updateStat(state, playerIndex, Stats.res.name, true, status.effect.increaseRes, name);
   }
   if (status.removeAfterDuration) {
     let statusDuration = status.removeAfterDuration;
@@ -613,6 +636,9 @@ function handleTimerRelatedStatusEffects(state) {
       if (status.effect.crtIncreasePerTenSeconds) {
         updateStat(state, player.index, Stats.crt.name, true, status.effect.crtIncreasePerTenSeconds, status.name);
       }
+      if (status.effect.brkIncreasePerTenSeconds) {
+        updateStat(state, player.index, Stats.brk.name, true, status.effect.brkIncreasePerTenSeconds, status.name);
+      }
       if (status.effect.betrayalPercentPerTenSeconds) {
         status.betrayalPercent = Math.min(status.betrayalPercent + status.effect.betrayalPercentPerTenSeconds, status.effect.maxBetrayalPercent);
       }
@@ -642,6 +668,9 @@ function handleWhenAttackedStatusEffects(state, playerIndex, damage, skill) {
       });
     }
     if (x.effect.igniteWhenHitByFire && skill.type === SkillType.fire.name) {
+      addStatus(state, playerIndex, Status.ignited.name);
+    }
+    if (x.effect.igniteWhenHitByBomb && skill.name === Skills.bomb.name) {
       addStatus(state, playerIndex, Status.ignited.name);
     }
     if (x.removeWhenAttacked) {
@@ -682,7 +711,10 @@ function handleOnHitStatusEffects(state, playerIndex, damage, preventHealing) {
 function dealDamage(state, playerIndex, amount, options) {
   let preventHealing = false;
   state.players[playerIndex].status.forEach(x => {
-    if (options.type === DamageType.attack && x.effect.immuneToAttackDamage
+    if (options.type === DamageType.attack && options.isCrt && x.effect.immuneToAttackDamage) {
+      amount = Math.floor(amount * 0.25);
+      state.log.push(`|info|${state.players[playerIndex].id}: blocked most of the damage due to ${x.name}`);
+    } else if (options.type === DamageType.attack && x.effect.immuneToAttackDamage
       || options.type === DamageType.other && x.effect.immuneToOtherDamage
       || options.source === Status.thunderGod.name && x.effect.immuneToThunderGod
       || options.isFire && x.effect.immuneToFireDamage) {
@@ -722,6 +754,13 @@ function dealDamage(state, playerIndex, amount, options) {
 
 function updateStat(state, playerIndex, stat, add, amount, source, isCrt) {
   const stats = state.players[playerIndex].stats;
+  if (add && stat === Stats.hp.name) {
+    let healingMultiplier = 1;
+    state.players[playerIndex].status.forEach(x => healingMultiplier *= x.effect.healingMultiplier || 1);
+    if (healingMultiplier !== 1) {
+      amount = Math.floor(amount * healingMultiplier);
+    }
+  }
   stats.current[stat] += amount;
   stats.current[stat] = Math.max(0, stats.current[stat]);
   if (stat === Stats.hp.name || stat === Stats.sp.name) {

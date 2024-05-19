@@ -3,9 +3,9 @@ import Battle from "./Battle.js";
 import Calculator from "./calculator/Calculator.js";
 import Grade from "./Grade.js";
 import SkillPlanner from "./SkillPlanner.js";
-import PetHouse from "./PetHouse.js";
+import Fighters from "./Fighters.js";
 
-const tabs = ["Calculator", "Battle", "Grade", "Skill Planner", "Pet House"];
+const tabs = ["Calculator", "Battle", "Grade", "Skill Planner", "Fighters"];
 
 const App = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
@@ -29,14 +29,17 @@ const App = () => {
     ${activeTab === "Battle" && html`<${Battle} />`}
     ${activeTab === "Grade" && html`<${Grade} />`}
     ${activeTab === "Skill Planner" && html`<${SkillPlanner} />`}
-    ${activeTab === "Pet House" && html`<${PetHouse} />`}
+    ${activeTab === "Fighters" && html`<${Fighters} />`}
     <hr/>
     Feel free to report any issues<br/>
     LINE ID: derpidgey<br/>
     Discord: CF99#9616
     <hr/>
-    <h3>Mods</h3>
-    <p>Mole: new pet with special stat 150 EVA and special skill that gives golden shield</p>
+    <h3>Mods (INCOMPLETE LIST)</h3>
+    <h4>Skills</h4>
+    <p>Ghoul Block: Launch restiction 1 → 3</p>
+    <h4>Pets</h4>
+    <p>Mole: Special stat 150 EVA, Special skill that gives golden shield (easter egg in the sim but here it's official)</p>
   </div>
   `;
 }

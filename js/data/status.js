@@ -58,10 +58,12 @@ const Status = {
     name: "Violent",
     type: StatusType.buff,
     effect: {
-      crtIncreasePerTenSeconds: 15,
+      crtIncreasePerTenSeconds: 25,
+      brkIncreasePerTenSeconds: 25
     },
     getExpertiseVersion: function () {
-      this.effect.crtIncreasePerTenSeconds = 20;
+      this.effect.crtIncreasePerTenSeconds = 50;
+      this.effect.brkIncreasePerTenSeconds = 50;
     }
   },
   spSteal: {
@@ -79,10 +81,10 @@ const Status = {
     type: StatusType.buff,
     effect: {
       debuffDurationMultiplier: 0.75,
-      atkMultiplierPerHpPercentLost: 0.005
+      atkMultiplierPerHpPercentLost: 0.003
     },
     getExpertiseVersion: function () {
-      this.effect.atkMultiplierPerHpPercentLost = 0.007
+      this.effect.atkMultiplierPerHpPercentLost = 0.005
     }
   },
   shieldWall: {
@@ -107,7 +109,9 @@ const Status = {
     name: "Sick",
     type: StatusType.debuff,
     effect: {
-      spConsumptionMultiplier: 2
+      spConsumptionMultiplier: 2,
+      preventOnDeath: true,
+      healingMultiplier: 0.5
     }
   },
   frozen: {
@@ -117,7 +121,8 @@ const Status = {
       skipActions: true,
       damageTakenMultiplier: 2,
       immuneToFireDamage: true,
-      removeIgnitedOnInflict: true
+      removeIgnitedOnInflict: true,
+      removeFrenzyOnInflict: true
     },
     removeWhenAttacked: true,
   },
@@ -156,7 +161,7 @@ const Status = {
     effect: {
       skipTurn: true
     },
-    removeAfterDuration: 3500,
+    removeAfterDuration: 6000,
   },
   rooted: {
     name: "Rooted",
@@ -193,9 +198,15 @@ const Status = {
     name: "Tired",
     type: StatusType.debuff,
     effect: {
-      skipActions: true
+      skipActions: true,
+      increaseDef: 200,
+      increaseRes: 200
     },
-    removeAfterTurns: 1
+    removeAfterTurns: 1,
+    getExpertiseVersion: function () {
+      this.effect.increaseDef = 400;
+      this.effect.increaseRes = 400;
+    }
   },
   poisoned: {
     name: "Poisoned",
@@ -222,7 +233,8 @@ const Status = {
     effect: {
       atkMultiplier: 0.9,
       increaseCrt: 130,
-      igniteWhenHitByFire: true
+      igniteWhenHitByFire: true,
+      igniteWhenHitByBomb: true
     },
     getExpertiseVersion: function () {
       this.effect.atkMultiplier = 0.85;

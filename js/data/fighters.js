@@ -18,8 +18,8 @@ const Fighters = {
     weaponType: WeaponType.staff,
     isv: [18, 36, 36],
     growthRate: [1.4, 1.8, 1.8],
-    bmv: [24, 9, 9],
-    mastery: SkillType.wind.name
+    bmv: [20, 9, 9],
+    mastery: SkillType.genjutsu.name
   },
   evilIvbu: {
     name: "Evil Ivbu",
@@ -69,7 +69,7 @@ const Fighters = {
     isv: [38, 38, 24],
     growthRate: [1.9, 1.9, 1.2],
     bmv: [8, 8, 20],
-    mastery: SkillType.taijutsu.name
+    mastery: SkillType.thunder.name
   },
   hel: {
     name: "Hel",
@@ -78,7 +78,7 @@ const Fighters = {
     weaponType: WeaponType.dagger,
     isv: [25, 40, 25],
     growthRate: [1.6, 2, 1.6],
-    bmv: [15, 7, 15],
+    bmv: [14, 7, 14],
     mastery: SkillType.fire.name
   },
   shifter: {
@@ -108,7 +108,7 @@ const Fighters = {
     weaponType: WeaponType.cudgel,
     isv: [30, 26, 34],
     growthRate: [1.65, 1.5, 1.85],
-    bmv: [10, 17, 9],
+    bmv: [10, 17, 8],
     mastery: SkillType.taijutsu.name
   },
   madara: {
@@ -188,7 +188,7 @@ const Fighters = {
     weaponType: WeaponType.cudgel,
     isv: [25, 36, 32],
     growthRate: [1.45, 1.95, 1.7],
-    bmv: [16, 8, 11],
+    bmv: [14, 8, 11],
     mastery: SkillType.genjutsu.name
   },
   kaneki: {
@@ -198,7 +198,7 @@ const Fighters = {
     weaponType: WeaponType.dagger,
     isv: [36, 34, 23],
     growthRate: [1.9, 1.75, 1.45],
-    bmv: [9, 11, 15],
+    bmv: [8, 10, 15],
     mastery: SkillType.ninjutsu.name
   },
   erza: {
@@ -208,7 +208,7 @@ const Fighters = {
     weaponType: WeaponType.sword,
     isv: [38, 25, 30],
     growthRate: [1.95, 1.5, 1.65],
-    bmv: [9, 14, 12],
+    bmv: [9, 14, 10],
     mastery: SkillType.genjutsu.name
   },
   zhaoYun: {
@@ -228,7 +228,7 @@ const Fighters = {
     weaponType: WeaponType.sword,
     isv: [34, 30, 26],
     growthRate: [1.85, 1.65, 1.5],
-    bmv: [9, 11, 16],
+    bmv: [9, 10, 15],
     mastery: SkillType.genjutsu.name
   },
   ares: {
@@ -238,7 +238,7 @@ const Fighters = {
     weaponType: WeaponType.heavyWeapon,
     isv: [36, 25, 30],
     growthRate: [1.8, 1.55, 1.75],
-    bmv: [8, 16, 12],
+    bmv: [8, 15, 11],
     mastery: SkillType.taijutsu.name
   },
   zeus: {
@@ -248,8 +248,8 @@ const Fighters = {
     weaponType: WeaponType.gloves,
     isv: [36, 29, 25],
     growthRate: [1.8, 1.7, 1.5],
-    bmv: [9, 12, 16],
-    mastery: SkillType.water.name
+    bmv: [8, 11, 15],
+    mastery: SkillType.thunder.name
   },
   hades: {
     name: "Hades",
@@ -258,7 +258,7 @@ const Fighters = {
     weaponType: WeaponType.gloves,
     isv: [36, 25, 29],
     growthRate: [1.8, 1.5, 1.7],
-    bmv: [9, 16, 12],
+    bmv: [9, 13, 11],
     mastery: SkillType.fire.name
   },
   deathKnight: {
@@ -278,7 +278,7 @@ const Fighters = {
     weaponType: WeaponType.sword,
     isv: [25, 35, 30],
     growthRate: [1.4, 1.9, 1.7],
-    bmv: [17, 8, 12],
+    bmv: [17, 8, 9],
     mastery: SkillType.thunder.name
   },
   shinigami: {
@@ -288,7 +288,7 @@ const Fighters = {
     weaponType: WeaponType.sword,
     isv: [32, 22, 36],
     growthRate: [1.7, 1.4, 1.9],
-    bmv: [12, 17, 8],
+    bmv: [11, 13, 8],
     mastery: SkillType.cursedSealJutsu.name
   },
   thor: {
@@ -298,8 +298,8 @@ const Fighters = {
     weaponType: WeaponType.sword,
     isv: [25, 31, 34],
     growthRate: [1.4, 1.7, 1.9],
-    bmv: [17, 12, 8],
-    mastery: SkillType.healing.name
+    bmv: [16, 10, 8],
+    mastery: SkillType.thunder.name
   },
   evilGuanYu: {
     name: "Evil Guan Yu",
@@ -308,7 +308,7 @@ const Fighters = {
     weaponType: WeaponType.cudgel,
     isv: [34, 31, 25],
     growthRate: [1.9, 1.7, 1.4],
-    bmv: [8, 12, 17],
+    bmv: [8, 11, 15],
     mastery: SkillType.taijutsu.name
   },
   void: {
@@ -318,7 +318,7 @@ const Fighters = {
     weaponType: WeaponType.dagger,
     isv: [33, 27, 30],
     growthRate: [1.8, 1.5, 1.7],
-    bmv: [8, 17, 12],
+    bmv: [8, 15, 11],
     mastery: SkillType.genjutsu.name
   },
   altira: {
@@ -328,7 +328,7 @@ const Fighters = {
     weaponType: WeaponType.sword,
     isv: [30, 40, 20],
     growthRate: [1.6, 1.9, 1.5],
-    bmv: [11, 8, 18],
+    bmv: [10, 8, 15],
     mastery: SkillType.genjutsu.name
   },
   badger: {
@@ -338,8 +338,8 @@ const Fighters = {
     weaponType: WeaponType.gloves,
     isv: [26, 35, 29],
     growthRate: [1.5, 1.8, 1.7],
-    bmv: [17, 8, 12],
-    mastery: SkillType.fire.name
+    bmv: [16, 8, 10],
+    mastery: SkillType.water.name
   },
   merv: {
     name: "Merv",
@@ -348,7 +348,7 @@ const Fighters = {
     weaponType: WeaponType.staff,
     isv: [33, 21, 36],
     growthRate: [1.75, 1.35, 1.9],
-    bmv: [11, 18, 8],
+    bmv: [11, 15, 8],
     mastery: SkillType.fire.name
   },
   fleshy: {
@@ -358,7 +358,7 @@ const Fighters = {
     weaponType: WeaponType.gloves,
     isv: [25, 32, 33],
     growthRate: [1.4, 1.8, 1.8],
-    bmv: [17, 12, 8],
+    bmv: [16, 11, 8],
     mastery: SkillType.taijutsu.name
   },
   simaYi: {
@@ -368,7 +368,7 @@ const Fighters = {
     weaponType: WeaponType.dagger,
     isv: [33, 26, 30],
     growthRate: [1.8, 1.45, 1.75],
-    bmv: [8, 18, 11],
+    bmv: [7, 18, 12],
     mastery: SkillType.fire.name
   },
   toadmeister: {
@@ -378,7 +378,7 @@ const Fighters = {
     weaponType: WeaponType.sword,
     isv: [30, 37, 22],
     growthRate: [1.65, 1.85, 1.45],
-    bmv: [11, 9, 17],
+    bmv: [11, 9, 12],
     mastery: SkillType.thunder.name
   },
   llamar: {
@@ -388,7 +388,7 @@ const Fighters = {
     weaponType: WeaponType.cudgel,
     isv: [25, 35, 29],
     growthRate: [1.45, 1.85, 1.65],
-    bmv: [18, 8, 11],
+    bmv: [18, 7, 12],
     mastery: SkillType.genjutsu.name
   },
   chrome: {
@@ -396,9 +396,9 @@ const Fighters = {
     evoName: "E·Chrome",
     iconId: 54,
     weaponType: WeaponType.gloves,
-    isv: [34, 19, 36],
-    growthRate: [1.75, 1.35, 1.85],
-    bmv: [11, 18, 8],
+    isv: [36, 19, 34],
+    growthRate: [1.85, 1.35, 1.75],
+    bmv: [8, 16, 11],
     mastery: SkillType.healing.name
   },
   freya: {
@@ -406,9 +406,9 @@ const Fighters = {
     evoName: "E·Freya",
     iconId: 52,
     weaponType: WeaponType.heavyWeapon,
-    isv: [24, 32, 33],
-    growthRate: [1.35, 1.75, 1.85],
-    bmv: [18, 11, 8],
+    isv: [24, 33, 32],
+    growthRate: [1.35, 1.85, 1.75],
+    bmv: [16, 8, 11],
     mastery: SkillType.healing.name
   },
   jupiter: {

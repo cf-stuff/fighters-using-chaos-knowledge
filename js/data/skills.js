@@ -243,7 +243,7 @@ const Skills = {
     undodgeable: true,
     phase: SkillPhase.beforeEnemyAttack,
     triggerPercent: 33,
-    maxTriggerTimes: 1,
+    maxTriggerTimes: 3,
     spConsumption: 13,
     getNormalVersion: function () {
       this.triggerPercent = 33;
@@ -343,17 +343,17 @@ const Skills = {
     iconId: 12,
     type: SkillType.wind.name,
     damage: {
-      atkMultiplier: 1.08
+      atkMultiplier: 1.2
     },
     phase: SkillPhase.afterYourAttack,
     triggerPercent: 27,
     spConsumption: 3,
     getNormalVersion: function () {
-      this.damage.atkMultiplier = 1.08;
+      this.damage.atkMultiplier = 1.2;
       this.triggerPercent = 27;
     },
     getExpertiseVersion: function () {
-      this.damage.atkMultiplier = 1.13
+      this.damage.atkMultiplier = 1.25;
       this.triggerPercent = 31;
     }
   },
@@ -370,9 +370,11 @@ const Skills = {
     spConsumption: 7,
     getNormalVersion: function () {
       this.triggerPercent = 20;
+      this.spConsumption = 7;
     },
     getExpertiseVersion: function () {
       this.triggerPercent = 25;
+      this.spConsumption = 5;
     }
   },
   violence: {
@@ -421,7 +423,9 @@ const Skills = {
     },
     effect: {
       status: Status.stunned.name,
-      target: SkillTarget.enemy
+      target: SkillTarget.enemy,
+      removeEnemyBell: true,
+      percentDamageHealedOnHit: 6
     },
     phase: SkillPhase.duringYourAttack,
     triggerPercent: 15,
@@ -441,11 +445,12 @@ const Skills = {
     iconId: 8,
     type: SkillType.taijutsu.name,
     damage: {
-      atkMultiplier: 2.5,
+      atkMultiplier: 2.5
     },
     effect: {
       status: Status.tired.name,
-      target: SkillTarget.self
+      target: SkillTarget.self,
+      percentDamageHealedOnHit: 12
     },
     phase: SkillPhase.duringYourAttack,
     triggerPercent: 23,
@@ -455,7 +460,7 @@ const Skills = {
       this.triggerPercent = 23;
     },
     getExpertiseVersion: function () {
-      this.damage.atkMultiplier = 2.6;
+      this.damage.atkMultiplier = 3.5;
       this.triggerPercent = 25;
     }
   },
@@ -464,17 +469,21 @@ const Skills = {
     iconId: 19,
     type: SkillType.taijutsu.name,
     effect: {
-      increaseSpd: 10
+      increaseSpd: 15,
+      increaseEva: 15,
+      gainPercentHp: 3
     },
     phase: SkillPhase.duringEnemyAttack,
     triggerPercent: 100,
     maxTriggerTimes: 10,
     spConsumption: 0,
     getNormalVersion: function () {
-      this.effect.increaseSpd = 10;
+      this.effect.increaseSpd = 15;
+      this.effect.increaseEva = 15;
     },
     getExpertiseVersion: function () {
-      this.effect.increaseSpd = 15;
+      this.effect.increaseSpd = 25;
+      this.effect.increaseEva = 25;
     }
   },
   counterattack: {
@@ -483,6 +492,9 @@ const Skills = {
     type: SkillType.taijutsu.name,
     damage: {
       atkMultiplier: 1.44,
+    },
+    effect: {
+      percentDamageHealedOnHit: 12
     },
     phase: SkillPhase.duringEnemyAttack,
     triggerPercent: 17,
@@ -571,6 +583,10 @@ const Skills = {
       status: Status.wine.name,
       target: SkillTarget.enemy
     },
+    secondaryEffect: {
+      status: Status.clumsy.name,
+      target: SkillTarget.enemy
+    },
     undodgeable: true,
     phase: SkillPhase.beforeFight,
     triggerPercent: 100,
@@ -590,9 +606,9 @@ const Skills = {
       status: Status.weakened.name,
       target: SkillTarget.enemy
     },
-    phase: SkillPhase.duringYourAttack,
+    phase: SkillPhase.beforeYourAttack,
     triggerPercent: 24,
-    maxTriggerTimes: 1,
+    maxTriggerTimes: 3,
     spConsumption: 16,
     getNormalVersion: function () {
       this.useExpertiseEffect = false;
@@ -609,9 +625,9 @@ const Skills = {
       status: Status.silenced.name,
       target: SkillTarget.enemy
     },
-    phase: SkillPhase.duringYourAttack,
+    phase: SkillPhase.beforeYourAttack,
     triggerPercent: 24,
-    maxTriggerTimes: 1,
+    maxTriggerTimes: 3,
     spConsumption: 13,
     getNormalVersion: function () {
       this.triggerPercent = 24;
