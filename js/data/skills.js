@@ -458,10 +458,12 @@ const Skills = {
     getNormalVersion: function () {
       this.damage.atkMultiplier = 2.5;
       this.triggerPercent = 23;
+      this.useExpertiseEffect = false;
     },
     getExpertiseVersion: function () {
       this.damage.atkMultiplier = 3.5;
       this.triggerPercent = 25;
+      this.useExpertiseEffect = true;
     }
   },
   gallop: {
