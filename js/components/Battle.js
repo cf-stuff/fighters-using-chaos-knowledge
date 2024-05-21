@@ -1,10 +1,10 @@
-import { html, useState, useRef, useCallback } from "../lib/preact.standalone.module.js";
+import { html, useState, useRef, useCallback, useEffect } from "../lib/preact.standalone.module.js";
 import toPlayer from "../calculator.js";
 import { getBuild, getBuildNames } from "../templates.js";
 import { simulateBattle } from "../battle.js";
 import Button from "./forms/Button.js";
 import SelectInput from "./forms/SelectInput.js";
-import { getSavedKeys, load } from "../storage.js";
+import { DB } from "../storage.js";
 import Display from "./Display.js";
 import Carousel from "./Carousel.js";
 import { ImageType, getImagePath } from "../image.js";
@@ -14,6 +14,9 @@ import ReplayLog from "./ReplayLog.js";
 const Battle = () => {
   const [left, setLeft] = useState(Array(4).fill("None"));
   const [right, setRight] = useState(Array(4).fill("None"));
+  const [options, setOptions] = useState([]);
+  const [leftPlayers, setLeftPlayers] = useState([]);
+  const [rightPlayers, setRightPlayers] = useState([]);
   const [battle, setBattle] = useState();
   const [leftWins, setLeftWins] = useState(0);
   const [rightWins, setRightWins] = useState(0);
@@ -33,16 +36,32 @@ const Battle = () => {
     }
   }, []);
 
-  const options = getSavedKeys();
-  options.push(...getBuildNames().filter(name => !options.includes(name)));
+  useEffect(() => {
+    const getOptions = async () => {
+      const savedKeys = await DB.getSavedKeys();
+      const buildNames = getBuildNames();
+      const uniqueBuildNames = [...new Set([...savedKeys, ...buildNames])];
+      setOptions(uniqueBuildNames);
+    }
 
-  const getPlayer = name => {
-    const newBuild = load(name) || getBuild(name);
-    return toPlayer(newBuild);
-  }
+    getOptions();
+  }, []);
 
-  const leftPlayers = left.filter(name => name !== "None").map(name => getPlayer(name));
-  const rightPlayers = right.filter(name => name !== "None").map(name => getPlayer(name));
+  useEffect(() => {
+    const getPlayer = async name => {
+      const newBuild = await DB.load(name) || getBuild(name);
+      return toPlayer(newBuild);
+    }
+
+    const getPlayers = async () => {
+      const leftResolved = await Promise.all(left.filter(name => name !== "None").map(name => getPlayer(name)));
+      const rightResolved = await Promise.all(right.filter(name => name !== "None").map(name => getPlayer(name)));
+      setLeftPlayers(leftResolved);
+      setRightPlayers(rightResolved);
+    }
+
+    getPlayers();
+  }, [left, right]);
 
   const handleSelect = (side, position) => e => {
     if (side === "left") {

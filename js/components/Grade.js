@@ -4,7 +4,7 @@ import { getBuild, getBuildNames, getPlayer, getPlayerNames } from "../templates
 import { simulateBattle } from "../battle.js";
 import Button from "./forms/Button.js";
 import SelectInput from "./forms/SelectInput.js";
-import { getSavedKeys, load } from "../storage.js";
+import { DB } from "../storage.js";
 import Display from "./Display.js";
 import Carousel from "./Carousel.js";
 import Utils from "../utils.js";
@@ -14,23 +14,39 @@ const weights = opponents.map(o => Number(o.name.substring(o.name.indexOf("(") +
 const backgroundColours = ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"];
 
 const Grade = () => {
+  const [options, setOptions] = useState([]);
   const [stage, setStage] = useState(0);
   const [build, setBuild] = useState("None");
+  const [player, setPlayer] = useState(null);
   const [currentOpponent, setCurrentOpponent] = useState(0);
   const [scores, setScores] = useState([]);
   const [progress, setProgress] = useState(0);
   const winratesRef = useRef(null);
   const weightedScoresRef = useRef(null);
 
-  const options = getSavedKeys();
-  options.push(...getBuildNames().filter(name => !options.includes(name)));
+  useEffect(() => {
+    const getOptions = async () => {
+      const savedKeys = await DB.getSavedKeys();
+      const buildNames = getBuildNames();
+      const uniqueBuildNames = [...new Set([...savedKeys, ...buildNames])];
+      setOptions(uniqueBuildNames);
+    }
 
-  const buildToPlayer = name => {
-    const newBuild = load(name) || getBuild(name);
-    return toPlayer(newBuild);
-  }
+    getOptions();
+  }, []);
 
-  const player = build !== "None" && buildToPlayer(build);
+  useEffect(() => {
+    const buildToPlayer = async name => {
+      const newBuild = await DB.load(name) || getBuild(name);
+      return toPlayer(newBuild);
+    }
+
+    const getPlayer = async () => {
+      setPlayer(build !== "None" && await buildToPlayer(build))
+    }
+
+    getPlayer();
+  }, [build]);
 
   const handleSubmit = () => {
     if (build === "None") return;

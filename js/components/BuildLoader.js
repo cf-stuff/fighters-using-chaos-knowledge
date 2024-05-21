@@ -1,34 +1,43 @@
-import { html, useState } from "../lib/preact.standalone.module.js";
+import { html, useEffect, useState } from "../lib/preact.standalone.module.js";
 import Button from "./forms/Button.js";
 import SelectInput from "./forms/SelectInput.js";
 import { getBuild, getBuildNames } from "../templates.js";
-import { getSavedKeys, load, remove, save } from "../storage.js";
+import { DB } from "../storage.js";
 import { initialState } from "../state.js";
 import Utils from "../utils.js";
 
 const BuildLoader = ({ build, setBuild }) => {
   const [selectedBuild, setSelectedBuild] = useState("None");
+  const [options, setOptions] = useState([]);
 
-  const loadBuild = () => {
+  useEffect(() => {
+    const getOptions = async () => {
+      const savedKeys = await DB.getSavedKeys();
+      const buildNames = getBuildNames();
+      const uniqueBuildNames = [...new Set([...savedKeys, ...buildNames])];
+      setOptions(uniqueBuildNames);
+    }
+
+    getOptions();
+  }, [selectedBuild]);
+
+  const loadBuild = async () => {
     if (selectedBuild === "None") {
       setBuild(Utils.deepClone(initialState));
     } else {
-      const newBuild = load(selectedBuild) || getBuild(selectedBuild);
+      const newBuild = await DB.load(selectedBuild) || getBuild(selectedBuild);
       setBuild(newBuild);
     }
   }
-  const saveBuild = () => {
+  const saveBuild = async () => {
     if (build.fighter.name === "None") return;
-    save(build);
-    setSelectedBuild(build.name)
+    await DB.save(build);
+    setSelectedBuild(build.name);
   };
-  const removeBuild = () => {
-    remove(selectedBuild);
+  const removeBuild = async () => {
+    await DB.remove(selectedBuild);
     setSelectedBuild("None");
   };
-
-  const options = getSavedKeys();
-  options.push(...getBuildNames().filter(name => !options.includes(name)));
 
   return html`
   <div class="row">

@@ -1,16 +1,17 @@
-import { html, useState, useRef } from "../lib/preact.standalone.module.js";
+import { html, useState, useRef, useEffect } from "../lib/preact.standalone.module.js";
 import CFDB from "../data/CFDB.js";
 import { getImagePath, ImageType } from "../image.js";
 import SkillSet from "./SkillSet.js";
 import Button from "./forms/Button.js";
 import ImageRadio from "./forms/ImageRadio.js";
 import SelectInput from "./forms/SelectInput.js";
-import { getSavedKeys, load } from "../storage.js";
+import { DB } from "../storage.js";
 import { getBuild, getBuildNames } from "../templates.js";
 
 const setMap = { "I": 0, "II": 1, "III": 2 };
 
 const SkillPlanner = () => {
+  const [options, setOptions] = useState([]);
   const [skillsets, setSkillsets] = useState([
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
@@ -46,12 +47,20 @@ const SkillPlanner = () => {
 
   const getIdFromSkillName = name => CFDB.getSkill(name)?.iconId || 0;
 
-  const options = getSavedKeys();
-  options.push(...getBuildNames().filter(name => !options.includes(name)));
+  useEffect(() => {
+    const getOptions = async () => {
+      const savedKeys = await DB.getSavedKeys();
+      const buildNames = getBuildNames();
+      const uniqueBuildNames = [...new Set([...savedKeys, ...buildNames])];
+      setOptions(uniqueBuildNames);
+    }
 
-  const loadSkillsFromBuild = () => {
+    getOptions();
+  }, []);
+
+  const loadSkillsFromBuild = async () => {
     if (build === "None") return;
-    const newBuild = load(build) || getBuild(build);
+    const newBuild = await DB.load(build) || getBuild(build);
     const skillset = setMap[loadPosRef.current.base.value];
     const newSkills = [getIdFromSkillName(newBuild.phylactery.skill), ...newBuild.skills.map(x => getIdFromSkillName(x))];
     newSkills.forEach((skill, i) => setSkill(skillset)(i, skill));
