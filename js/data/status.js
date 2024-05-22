@@ -196,7 +196,7 @@ const Status = {
   },
   tired: {
     name: "Tired",
-    type: StatusType.debuff,
+    type: StatusType.other,
     effect: {
       skipActions: true,
       increaseDef: 200,
