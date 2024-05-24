@@ -185,7 +185,7 @@ function getAllSkillsEligibleToBeUsed(state, playerIndex, phase) {
     .filter(skill => state.players[playerIndex].status.some(x => x.effect.skipActions) ? skill.notAnAction : true)
     .filter(skill => skill.spConsumption ? state.players[playerIndex].stats.current.sp >= skill.spConsumption : true)
     .filter(skill => areActiveSkillsDisabled(state, playerIndex, phase) ? skill.bypassDisableActiveSkills : true)
-    .filter(skill => skill.name === Skills.movingIllusion.name ? !state.players[playerIndex].status.some(x => x.effect.disableMovingIllusion): true)
+    .filter(skill => skill.name === Skills.movingIllusion.name ? !state.players[playerIndex].status.some(x => x.effect.disableMovingIllusion) : true)
     .filter(skill => skill.maxTriggerTimes ? skill.remainingUses > 0 : true)
     .filter(skill => skill.effect?.removeRandomDebuff ? getDebuffs(state, playerIndex).length > 0 : true)
     .filter(skill => skill.cantUseIfThunderGodIsActive ? !isThunderGodActive(state) : true)
@@ -663,6 +663,11 @@ function handleStartOfTurnStatusEffects(state, playerIndex) {
     }
     if (x.removeOnTurnStart) {
       removeStatus(state, playerIndex, x.name);
+    }
+  });
+  state.players[playerIndex ^ 1].status.forEach(x => {
+    if (x.removeOnEnemyTurnStart) {
+      removeStatus(state, playerIndex ^ 1, x.name);
     }
   });
 }
