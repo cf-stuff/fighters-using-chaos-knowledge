@@ -379,7 +379,7 @@ const PetSkills = {
       atkMultiplier: 0.5
     },
     effect: {
-      removeRandomDebuff: true
+      removeAllDebuffs: true
     },
     phase: SkillPhase.petAttack,
     triggerPercent: 10,

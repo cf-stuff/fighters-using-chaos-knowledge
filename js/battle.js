@@ -185,6 +185,7 @@ function getAllSkillsEligibleToBeUsed(state, playerIndex, phase) {
     .filter(skill => state.players[playerIndex].status.some(x => x.effect.skipActions) ? skill.notAnAction : true)
     .filter(skill => skill.spConsumption ? state.players[playerIndex].stats.current.sp >= skill.spConsumption : true)
     .filter(skill => areActiveSkillsDisabled(state, playerIndex, phase) ? skill.bypassDisableActiveSkills : true)
+    .filter(skill => skill.name === Skills.movingIllusion.name ? !state.players[playerIndex].status.some(x => x.effect.disableMovingIllusion): true)
     .filter(skill => skill.maxTriggerTimes ? skill.remainingUses > 0 : true)
     .filter(skill => skill.effect?.removeRandomDebuff ? getDebuffs(state, playerIndex).length > 0 : true)
     .filter(skill => skill.cantUseIfThunderGodIsActive ? !isThunderGodActive(state) : true)
@@ -535,6 +536,9 @@ function createStatus(state, playerIndex, name, options) {
   if (status.effect.removeFrenzyOnInflict) {
     removeStatus(state, playerIndex, Status.bloodFrenzy.name);
   }
+  if (status.effect.removeHornsOnInflict) {
+    removeStatus(state, playerIndex, Status.barbarism.name);
+  }
   if (status.effect.percentHpShield) {
     status.hpShield = Math.floor(state.players[playerIndex].stats.initial.hp * status.effect.percentHpShield / 100);
   }
@@ -836,7 +840,7 @@ function getPlayersEligibleToTakeTurn(state) {
   return state.players.filter(player => {
     let spdMultiplier = 1;
     player.status.forEach(x => spdMultiplier *= x.effect.spdMultiplier || 1);
-    return (state.timer % getSecondsPerAttack(player.stats.current.spd)) === 0;
+    return (state.timer % getSecondsPerAttack(player.stats.current.spd * spdMultiplier)) === 0;
   });
 }
 

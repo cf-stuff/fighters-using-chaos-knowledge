@@ -150,6 +150,7 @@ const Status = {
     type: StatusType.debuff,
     effect: {
       evaMultiplier: 0.75,
+      disableMovingIllusion: true,
       fireDamageTakenMultiplier: 2
     },
     removeOnEnemyTurnStart: true,
@@ -167,11 +168,16 @@ const Status = {
     name: "Rooted",
     type: StatusType.debuff,
     effect: {
-      spdMultiplier: 0.5
+      spdMultiplier: 0.5,
+      decreaseBrk: 100,
+      decreaseCrt: 100,
+      decreaseHit: 100,
+      decreaseDef: 100
     },
     removeAfterDuration: 18000,
     getExpertiseVersion: function () {
-      this.removeAfterDuration = 21000
+      this.removeAfterDuration = 21000;
+      this.effect.spdMultiplier = 0.2;
     }
   },
   paralyzed: {
@@ -244,7 +250,8 @@ const Status = {
     name: "Weakened",
     type: StatusType.debuff,
     effect: {
-      atkMultiplier: 0.25
+      atkMultiplier: 0.25,
+      removeHornsOnInflict: true
     },
     removeAfterDuration: 25000,
     getExpertiseVersion: function () {

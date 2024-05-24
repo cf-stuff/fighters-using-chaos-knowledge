@@ -328,7 +328,7 @@ const Fighters = {
     weaponType: WeaponType.sword,
     isv: [30, 40, 20],
     growthRate: [1.6, 1.9, 1.5],
-    bmv: [10, 8, 15],
+    bmv: [11, 8, 15],
     mastery: SkillType.genjutsu.name
   },
   badger: {

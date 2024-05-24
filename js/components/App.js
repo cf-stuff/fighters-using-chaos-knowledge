@@ -39,9 +39,11 @@ const App = () => {
     <h4>Buffs</h4>
     <p>All pet EVA special stats 50 → 150</p>
     <p>Pet attack totems (purple/blue/green/orange/red): effect per lvl 0.1 → 0.2, at lvl 64 8.3% → 14.6%</p>
+    <p>Blue Totem: remove random debuff → remove all debuffs</p>
     <p>Bacteria: NEW - 50% healing reduction and can't revive while sick</p>
     <p>Freezing Skill: NEW - removes enemy frenzy</p>
-    <p>Thorn Shield: Launch restiction 1 → 3</p>
+    <p>Inescapable Net: NEW - Disables moving illusion</p>
+    <p>Thorn Shield: Launch restiction 1 → 3, spd multiplier 0.5/0.5 → 0.5/0.2, NEW -100 brk/crt/hit/def</p>
     <p>Fast Move: sp cost 7/7 → 7/5</p>
     <p>Storm Boxing: damage 1.08/1.13 → 1.2/1.25</p>
     <p>Violence: CRT 15/20 → 25/50, BRK 0/0 → 25/50</p>
@@ -51,8 +53,9 @@ const App = () => {
     <p>Counterattack: life steal 0/0 → 12/12</p>
     <p>Bomb: NEW - ignites if they drank wine</p>
     <p>Wine: HIT/EVA 0 → -200</p>
-    <p>Ghoul Block: Launch restiction 1 → 3, during attack → before attack</p>
+    <p>Ghoul Block: Launch restiction 1 → 3, during attack → before attack, removes enemy barb</p>
     <p>Skill Shackles: Launch restiction 1 → 3, during attack → before attack</p>
+    <p>Ghost Tiger: remove random debuff → remove all debuffs</p>
     <h4>Nerfs</h4>
     <p>Pet freeze: triggers fury burst</p>
     <p>Barbarism: ATK% per HP% 0.5/0.7 → 0.3/0.5</p>
