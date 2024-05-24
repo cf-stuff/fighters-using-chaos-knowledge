@@ -53,7 +53,7 @@ const App = () => {
     <p>Counterattack: life steal 0/0 → 12/12</p>
     <p>Bomb: NEW - ignites if they drank wine</p>
     <p>Wine: HIT/EVA 0 → -200</p>
-    <p>Ghoul Block: Launch restiction 1 → 3, during attack → before attack, removes enemy barb</p>
+    <p>Ghoul Block: Launch restiction 1 → 3, during attack → before attack, -200/250 hit</p>
     <p>Skill Shackles: Launch restiction 1 → 3, during attack → before attack</p>
     <p>Ghost Tiger: remove random debuff → remove all debuffs</p>
     <h4>Nerfs</h4>

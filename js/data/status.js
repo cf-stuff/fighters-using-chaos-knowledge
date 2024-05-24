@@ -251,11 +251,12 @@ const Status = {
     type: StatusType.debuff,
     effect: {
       atkMultiplier: 0.25,
-      removeHornsOnInflict: true
+      decreaseHit: 200
     },
     removeAfterDuration: 25000,
     getExpertiseVersion: function () {
-      this.removeAfterDuration = 28000
+      this.removeAfterDuration = 28000;
+      this.decreaseHit = 250;
     }
   },
   silenced: {
